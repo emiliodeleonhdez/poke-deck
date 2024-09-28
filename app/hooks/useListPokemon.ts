@@ -17,8 +17,8 @@ const useListPokemon = (endpoint: string) => {
         const pokemonPromises = initList.results.map(
           async (pokemon: { url: string }) => {
             const res = await pokeAxiosClient.get<any>(pokemon.url);
-            console.log(res);
             return {
+              pokemonId: res.id,
               name: res.name,
               image: res.sprites.front_default,
               types: res.types.map(

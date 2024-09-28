@@ -13,7 +13,7 @@ const HomePage: React.FC = () => {
         <>Loading Pokémon... Gotta Catch 'Em All!</>
       ) : (
         pokemonList.map((pokemon, index) => (
-          <PokeCard id={index} pokeInfo={pokemon} />
+          <PokeCard key={index} pokeInfo={pokemon} />
         ))
       )}
     </section>
