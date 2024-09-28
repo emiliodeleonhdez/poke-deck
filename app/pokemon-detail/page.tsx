@@ -7,8 +7,6 @@ import usePokemonDetails from "../hooks/usePokemonDetails";
 import PokeCard from "../components/PokeCard";
 
 const PokemonDetail: React.FC = () => {
-  const pokeAxiosClient = new PokeAxiosClient(pokeApiUrl);
-
   const searchParams = useSearchParams();
   const search = searchParams ? searchParams.get("id") : null;
 
