@@ -10,7 +10,7 @@ const HomePage: React.FC = () => {
   const offset = (page - 1) * limit;
   const router = useRouter();
 
-  const { pokemonList, loading, error } = useListPokemon(
+  const { pokemonList, loading } = useListPokemon(
     `/pokemon?limit=${limit}&offset=${offset}`
   );
 
