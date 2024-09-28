@@ -28,7 +28,7 @@ const PokeCardDetail: React.FC<PokeCardDetailProps> = ({
     <div
       onClick={action}
       key={pokemonId}
-      className="group h-full w-1/2 border-2 border-transparent bg-pokemon bg-opacity-70 w-52 h-60 m-3 rounded-md p-4 flex flex-col items-center justify-start"
+      className="group w-96  h-full w-1/2 border-2 border-transparent bg-pokemon bg-opacity-70 w-52 h-60 m-3 rounded-md p-4 flex flex-col items-center justify-start"
     >
       <div className="w-32 flex justify-center items-center">
         <img className="bg-white p-3 rounded-full" src={image} alt="poke" />
@@ -48,7 +48,7 @@ const PokeCardDetail: React.FC<PokeCardDetailProps> = ({
           </li>
         ))}
         {evolutions.length > 1 ? (
-          <div className="flex items-center">
+          <div className="flex items-center ">
             <span className="font-bold">Evolves to</span>:{" "}
             <ul className="flex space-x-1">
               {evolutions.slice(1).map((evo, index) => (
