@@ -1,28 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
 import useListPokemon from "../hooks/useListPokemon";
+import PokeCard from "../components/PokeCard";
 
 const HomePage: React.FC = () => {
   const { pokemonList, loading, error } = useListPokemon(
-    "/pokemon?limit=20&offset=60"
+    "/pokemon?limit=20&offset=20"
   );
 
-  useEffect(() => {
-    if (pokemonList) {
-      console.log("POKE LIST IN FRONT", pokemonList);
-    }
-  });
-
   return (
-    <section className="home-page-container">
+    <section className="home-page-container w-full flex flex-wrap items-center justify-center">
       {loading ? (
         <>Loading Pokémon... Gotta Catch 'Em All!</>
       ) : (
-        pokemonList.map((x, index) => (
-          <div key={index} className="flex flex-col items-center justify-center">
-            <img src={x.image} alt="poke" />
-            <p>{x.name}</p>
-
-          </div>
+        pokemonList.map((pokemon, index) => (
+          <PokeCard id={index} pokeInfo={pokemon} />
         ))
       )}
     </section>
