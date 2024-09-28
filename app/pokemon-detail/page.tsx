@@ -12,8 +12,11 @@ const PokemonDetail: React.FC = () => {
 
   return (
     <section className="pokemon-detail-container flex justify-center">
-      {pokemonDetails ? (
-        <PokeCardDetail pokeInfo={pokemonDetails} />
+      {pokemonDetails && evolutionChain ? (
+        <PokeCardDetail
+          pokeInfo={pokemonDetails}
+          evolutionChain={evolutionChain}
+        />
       ) : (
         <p>Loading...</p>
       )}

@@ -1,17 +1,46 @@
 import React from "react";
-import { Ability, Pokemon, Stat } from "../interfaces/pokemon";
+import {
+  Ability,
+  EvolutionChain,
+  Pokemon,
+  Species,
+  Stat,
+} from "../interfaces/pokemon";
 import PokeTypeIcon from "./PokeTypeIcon";
 
 type PokeCardDetailProps = {
   pokeInfo: Pokemon;
   action?: () => void;
+  evolutionChain?: EvolutionChain;
 };
 
 const PokeCardDetail: React.FC<PokeCardDetailProps> = ({
   pokeInfo,
   action,
+  evolutionChain,
 }) => {
   const { image, name, pokemonId, types, ability, stats } = pokeInfo;
+
+  console.log("evolutionChain", evolutionChain);
+
+  const getEvolutions = (chain: EvolutionChain["chain"]): string[] => {
+    const evolutions: string[] = [];
+
+    let currentChain = chain;
+    while (currentChain) {
+      evolutions.push(currentChain.species.name);
+
+      if (currentChain.evolves_to && currentChain.evolves_to.length > 0) {
+        currentChain = currentChain.evolves_to[0];
+      } else {
+        currentChain = null;
+      }
+    }
+
+    return evolutions;
+  };
+
+  const evolutions = evolutionChain ? getEvolutions(evolutionChain.chain) : [];
 
   return (
     <div
@@ -26,16 +55,30 @@ const PokeCardDetail: React.FC<PokeCardDetailProps> = ({
       {types && <PokeTypeIcon types={types} />}
       <ul className="flex w-5/6 items-center justify-evenly">
         {ability?.map((item: Ability) => (
-          <li>{item.name}</li>
+          <li key={item.name}>{item.name}</li>
         ))}
       </ul>
       <ul className="flex flex-col w-5/6 items-start justify-evenly m-2 p-2">
         {stats?.map((stat: Stat) => (
-          <li>
+          <li key={stat.name}>
             <span className="capitalize font-bold">{stat.name}</span>:{" "}
             <span>{stat.value}</span>
           </li>
         ))}
+        {evolutions.length > 1 ? (
+          <div className="flex items-center">
+            <span className="font-bold">Evolves to</span>:{" "}
+            <ul className="flex space-x-1">
+              {evolutions.slice(1).map((evo, index) => (
+                <li key={index} className="capitalize">
+                  {evo}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <p>No evolution</p>
+        )}
       </ul>
     </div>
   );
