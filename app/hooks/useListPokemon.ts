@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import PokeAxiosClient from "../client/apiClient";
 import { pokeApiUrl } from "../utils/constants";
 import { Pokemon } from "../interfaces/pokemon";
+import { useError } from "../context/ErrorContext";
 
 const pokeAxiosClient = new PokeAxiosClient(pokeApiUrl);
 
 const useListPokemon = (endpoint: string) => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<any>(null);
-
+  const { setError } = useError();
   useEffect(() => {
     const getPokemons = async () => {
       try {
@@ -29,7 +29,7 @@ const useListPokemon = (endpoint: string) => {
         const pokemons = await Promise.all(pokemonPromises);
         setPokemonList(pokemons);
       } catch (error) {
-        setError(error);
+        setError("Failed to fetch Pokémon data. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -38,7 +38,7 @@ const useListPokemon = (endpoint: string) => {
     getPokemons();
   }, [endpoint]);
 
-  return { pokemonList, loading, error };
+  return { pokemonList, loading };
 };
 
 export default useListPokemon;

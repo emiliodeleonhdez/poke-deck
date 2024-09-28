@@ -38,7 +38,6 @@ const usePokemonDetails = (search: string | null) => {
           const evolutionUrl = speciesRes.evolution_chain.url;
           const evolutionRes =
             await pokeAxiosClient.get<EvolutionChainResponse>(evolutionUrl);
-          console.log("evolutionRes", evolutionRes);
           setEvolutionChain(evolutionRes);
         } catch (error) {
           console.error("Error fetching Pokémon details:", error);
