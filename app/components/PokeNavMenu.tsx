@@ -14,7 +14,7 @@ const PokeNavMenu: React.FC<PokeNavMenuProps> = ({ isNavbar }) => {
   };
 
   const handleAboutClick = () => {
-    window.open("https://github.com/tu-perfil", "_blank");
+    window.open("https://github.com/emiliodeleonhdez", "_blank");
   };
 
   return (
