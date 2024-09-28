@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Poke Deck Application
+
+## Objective
+
+The Poke Deck application is a React-based project designed to interact with the PokeAPI. It enables users to search for and view details about various Pokémon. This application showcases skills in React development, API integration, state management, and overall architecture.
+
+## Deployment
+
+To deploy this project run
+
+```bash
+  npm run deploy
+```
 
 ## Getting Started
 
-First, run the development server:
+To get the application running locally:
+
+#### Clone or Fork the Repository
+
+Clone the project to your local machine.
+
+Install Dependencies
+
+Use the following command to install the necessary dependencies:
+
+```bash
+npm install
+```
+
+#### Start the Application
+
+Once the dependencies are installed, start the development server using:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## How It Works
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Once the project is running, you will see a list of 20 Pokémon displayed as cards. Each card contains the following information:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Pokémon Name
+- Default Image
+- Types (e.g., Water, Fire)
+- Pokémon Details
 
-## Learn More
+By clicking on a Pokémon card, you can view detailed stats and information about that specific Pokémon.
 
-To learn more about Next.js, take a look at the following resources:
+#### Favorite Pokémon
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Each Pokémon card has a Pokeball icon. Clicking on this icon will set the Pokémon as a "favorite."
+You can view your list of favorite Pokémon by clicking on the Pokeball icon located at the top left of the navigation bar.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### Application Features
 
-## Deploy on Vercel
+- Built using Next.js in its latest version.
+- API requests are managed by a dedicated API Class responsible for all data fetching.
+- Error Handling is implemented using an ErrorContext with a provider that displays a notification if there is an issue fetching data from the API.
+- Custom hooks for modular functionality:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- useListPokemon: Fetches Pokémon data in batches of 20.
+- usePokemonCount: Retrieves the total number of available Pokémon in the API.
+- usePokemonDetails: Provides detailed information for a selected Pokémon, including: - Name - Image - Types - Abilities - Stats (HP, Attack, Defense, etc.) - Evolution Chains
+- useFavoritePokemon: Manages the user's favorite Pokémon and related logic.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### Testing
+
+The project includes a test case for the useListPokemon hook using Jest. The objective of this test is to mock the API and evaluate the hook's functionality by obtaining a list of Pokémon.
+
+#### Summary
+
+This Poke Deck application leverages React, Next.js,TypeScript, Tailwind and PokeAPI to provide users with a seamless experience when searching and viewing detailed information about their favorite Pokémon. Error handling, state management, and testing are all integrated to ensure a robust and well-architected application.
