@@ -14,7 +14,6 @@ class PokeAxiosClient {
     }
 
     private handleResponse<T>(response: AxiosResponse<T>): T {
-        console.log("response at class", response)
         return response.data;
     }
 
