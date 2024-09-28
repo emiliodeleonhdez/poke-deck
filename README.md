@@ -4,14 +4,6 @@
 
 The Poke Deck application is a React-based project designed to interact with the PokeAPI. It enables users to search for and view details about various Pokémon. This application showcases skills in React development, API integration, state management, and overall architecture.
 
-## Deployment
-
-To deploy this project run
-
-```bash
-  npm run deploy
-```
-
 ## Getting Started
 
 To get the application running locally:
