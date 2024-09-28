@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import { useRouter } from "next/router";
 import PokeAxiosClient from "../client/apiClient";
 import { pokeApiUrl } from "../utils/constants";
 import {
@@ -12,7 +11,6 @@ const usePokemonDetails = (search: string | null) => {
   const [pokemonDetails, setPokemonDetails] = useState<Pokemon | null>(null);
   const [evolutionChain, setEvolutionChain] =
     useState<EvolutionChainResponse | null>(null);
-  //   const router = useRouter();
   const pokeAxiosClient = new PokeAxiosClient(pokeApiUrl);
 
   useEffect(() => {
@@ -40,6 +38,7 @@ const usePokemonDetails = (search: string | null) => {
           const evolutionUrl = speciesRes.evolution_chain.url;
           const evolutionRes =
             await pokeAxiosClient.get<EvolutionChainResponse>(evolutionUrl);
+          console.log("evolutionRes", evolutionRes);
           setEvolutionChain(evolutionRes);
         } catch (error) {
           console.error("Error fetching Pokémon details:", error);

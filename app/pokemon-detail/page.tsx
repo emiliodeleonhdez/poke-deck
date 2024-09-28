@@ -1,10 +1,8 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import React from "react";
-import PokeAxiosClient from "../client/apiClient";
-import { pokeApiUrl } from "../utils/constants";
 import usePokemonDetails from "../hooks/usePokemonDetails";
-import PokeCard from "../components/PokeCard";
+import PokeCardDetail from "../components/PokeCardDetail";
 
 const PokemonDetail: React.FC = () => {
   const searchParams = useSearchParams();
@@ -15,7 +13,7 @@ const PokemonDetail: React.FC = () => {
   return (
     <section className="pokemon-detail-container flex justify-center">
       {pokemonDetails ? (
-        <PokeCard pokeInfo={pokemonDetails} />
+        <PokeCardDetail pokeInfo={pokemonDetails} />
       ) : (
         <p>Loading...</p>
       )}

@@ -7,9 +7,10 @@ export interface Pokemon {
   stats: Stat[];
 }
 
-export interface TypesInfo<T> {
-  type: T;
+export interface PokemonType {
+  type: TypeDetail; // Estructura correcta para el tipo
 }
+
 export interface TypeDetail {
   name: string;
   url: string;
