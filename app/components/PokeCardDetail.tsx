@@ -36,13 +36,13 @@ const PokeCardDetail: React.FC<PokeCardDetailProps> = ({
       <h2 className="capitalize font-bold text-2xl m-2 p-2">{name}</h2>
       {types && <PokeTypeIcon types={types} />}
       <ul className="flex w-5/6 items-center justify-evenly">
-        {ability?.map((item: Ability) => (
-          <li key={item.name}>{item.name}</li>
+        {ability?.map((item: Ability, index) => (
+          <li key={index}>{item.name}</li>
         ))}
       </ul>
       <ul className="flex flex-col w-5/6 items-start justify-evenly m-2 p-2">
-        {stats?.map((stat: Stat) => (
-          <li key={stat.name}>
+        {stats?.map((stat: Stat, index) => (
+          <li key={index}>
             <span className="capitalize font-bold">{stat.name}</span>:{" "}
             <span>{stat.value}</span>
           </li>
