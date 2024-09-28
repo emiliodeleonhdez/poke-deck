@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PokeAxiosClient from "../client/apiClient";
 import { pokeApiUrl } from "../utils/constants";
-import { Pokemon, TypeDetail, TypesInfo } from "../interfaces/pokemon";
+import { Pokemon } from "../interfaces/pokemon";
 
 const pokeAxiosClient = new PokeAxiosClient(pokeApiUrl);
 
@@ -21,9 +21,7 @@ const useListPokemon = (endpoint: string) => {
               pokemonId: res.id,
               name: res.name,
               image: res.sprites.front_default,
-              types: res.types.map(
-                (type: TypesInfo<TypeDetail>) => type.type.name
-              ),
+              types: res.types.map((type: any) => type.type.name),
             };
           }
         );

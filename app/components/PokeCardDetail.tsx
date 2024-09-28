@@ -1,12 +1,9 @@
 import React from "react";
-import {
-  Ability,
-  EvolutionChain,
-  Pokemon,
-  Species,
-  Stat,
-} from "../interfaces/pokemon";
+import { Ability, EvolutionChain, Pokemon, Stat } from "../interfaces/pokemon";
 import PokeTypeIcon from "./PokeTypeIcon";
+import { getEvolutions } from "../utils/getEvolutions";
+import PokeBallFavoriteButton from "./PokeBallFavoriteButton";
+import { addPokemonToStorage } from "../utils/addPokemonToStorage";
 
 type PokeCardDetailProps = {
   pokeInfo: Pokemon;
@@ -21,32 +18,17 @@ const PokeCardDetail: React.FC<PokeCardDetailProps> = ({
 }) => {
   const { image, name, pokemonId, types, ability, stats } = pokeInfo;
 
-  console.log("evolutionChain", evolutionChain);
-
-  const getEvolutions = (chain: EvolutionChain["chain"]): string[] => {
-    const evolutions: string[] = [];
-
-    let currentChain = chain;
-    while (currentChain) {
-      evolutions.push(currentChain.species.name);
-
-      if (currentChain.evolves_to && currentChain.evolves_to.length > 0) {
-        currentChain = currentChain.evolves_to[0];
-      } else {
-        currentChain = null;
-      }
-    }
-
-    return evolutions;
-  };
-
   const evolutions = evolutionChain ? getEvolutions(evolutionChain.chain) : [];
+
+  const handleAddToStorage = (pokemon: Pokemon) => {
+    addPokemonToStorage(pokemon);
+  };
 
   return (
     <div
       onClick={action}
       key={pokemonId}
-      className="h-full w-1/2 border-2 border-transparent hover:border-pokemon_strong_blue cursor-pointer bg-pokemon bg-opacity-70 hover:bg-opacity-60 w-52 h-60 m-3 rounded-md p-4 flex flex-col items-center justify-start"
+      className="group h-full w-1/2 border-2 border-transparent bg-pokemon bg-opacity-70 w-52 h-60 m-3 rounded-md p-4 flex flex-col items-center justify-start"
     >
       <div className="w-32 flex justify-center items-center">
         <img className="bg-white p-3 rounded-full" src={image} alt="poke" />
@@ -80,6 +62,10 @@ const PokeCardDetail: React.FC<PokeCardDetailProps> = ({
           <p>No evolution</p>
         )}
       </ul>
+      <PokeBallFavoriteButton
+        pokeInfo={pokeInfo}
+        onClick={handleAddToStorage}
+      />
     </div>
   );
 };
