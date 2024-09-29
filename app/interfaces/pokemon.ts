@@ -8,7 +8,7 @@ export interface Pokemon {
 }
 
 export interface PokemonType {
-  type: TypeDetail; // Estructura correcta para el tipo
+  type: TypeDetail;
 }
 
 export interface TypeDetail {
