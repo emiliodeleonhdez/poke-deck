@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 const FavoritesPage: React.FC = () => {
   const router = useRouter();
-  const { pokemonList, loading, error } = useFavoritePokemon();
+  const { pokemonList, loading } = useFavoritePokemon();
 
   const handlePokemonDetail = (id: number) => {
     router.push(`/pokemon-detail?id=${id}`);

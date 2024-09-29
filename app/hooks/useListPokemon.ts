@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import PokeAxiosClient from "../client/apiClient";
 import { pokeApiUrl } from "../utils/constants";
-import { Pokemon } from "../interfaces/pokemon";
+import {
+  Pokemon,
+  PokemonResponse,
+  PokemonResponsePromise,
+  PokemonType,
+} from "../interfaces/pokemon";
 import { useError } from "../context/ErrorContext";
 
 const pokeAxiosClient = new PokeAxiosClient(pokeApiUrl);
@@ -13,15 +18,17 @@ const useListPokemon = (endpoint: string) => {
   useEffect(() => {
     const getPokemons = async () => {
       try {
-        const initList = await pokeAxiosClient.get<any>(endpoint);
+        const initList = await pokeAxiosClient.get<PokemonResponse>(endpoint);
         const pokemonPromises = initList.results.map(
           async (pokemon: { url: string }) => {
-            const res = await pokeAxiosClient.get<any>(pokemon.url);
+            const res = await pokeAxiosClient.get<PokemonResponsePromise>(
+              pokemon.url
+            );
             return {
               pokemonId: res.id,
               name: res.name,
               image: res.sprites.front_default,
-              types: res.types.map((type: any) => type.type.name),
+              types: res.types.map((type: PokemonType) => type.type.name),
             };
           }
         );
@@ -29,7 +36,9 @@ const useListPokemon = (endpoint: string) => {
         const pokemons = await Promise.all(pokemonPromises);
         setPokemonList(pokemons);
       } catch (error) {
-        setError("Failed to fetch Pokémon data. Please try again later.");
+        setError(
+          "Failed to fetch Pokémon data. Please try again later." + error
+        );
       } finally {
         setLoading(false);
       }

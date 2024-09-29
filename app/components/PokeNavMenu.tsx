@@ -2,11 +2,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import PokeBallFavoriteNavButton from "./PokeBallFavoriteNavButton";
 
-type PokeNavMenuProps = {
-  isNavbar?: boolean;
-};
-
-const PokeNavMenu: React.FC<PokeNavMenuProps> = ({ isNavbar }) => {
+const PokeNavMenu: React.FC = () => {
   const router = useRouter();
 
   const handleDocsClick = () => {

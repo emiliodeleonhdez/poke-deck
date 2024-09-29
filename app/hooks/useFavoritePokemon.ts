@@ -4,7 +4,7 @@ import { Pokemon } from "../interfaces/pokemon";
 const useFavoritePokemon = () => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<any>(null);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     try {

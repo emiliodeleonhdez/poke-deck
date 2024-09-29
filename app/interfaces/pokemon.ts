@@ -4,7 +4,12 @@ export interface Pokemon {
   image: string;
   types?: string[];
   ability?: Ability[];
-  stats: Stat[];
+  stats?: Stat[];
+}
+
+export interface PokemonInit {
+  name: string;
+  url: string;
 }
 
 export interface PokemonType {
@@ -21,9 +26,20 @@ export interface Ability {
   url?: string;
 }
 
+export interface AbilityResponse {
+  ability: {
+    name: string;
+    url: string;
+  };
+}
+
 export interface Stat {
-  name: string;
-  value: string;
+  base_stat: number;
+  effort: number;
+  stat: {
+    name: string;
+    url: string;
+  };
 }
 
 export interface EvolutionChain {
@@ -97,4 +113,43 @@ export interface EvolutionDetail {
 export interface Species {
   name: string;
   url: string;
+}
+
+export interface PokemonResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: PokemonInit[];
+}
+
+export interface PokemonResponsePromise {
+  abilities: Array<{ ability: { name: string; url: string } }>;
+  base_experience: number;
+  forms: Array<{ name: string; url: string }>;
+  game_indices: Array<{
+    game_index: number;
+    version: { name: string; url: string };
+  }>;
+  height: number;
+  held_items: Array<{ item: { name: string; url: string } }>;
+  id: number;
+  is_default: boolean;
+  location_area_encounters: string;
+  moves: Array<{ move: { name: string; url: string } }>;
+  name: string;
+  order: number;
+  past_abilities: Array<any>;
+  past_types: Array<any>;
+  species: { name: string; url: string };
+  sprites: {
+    front_default: string;
+    back_female: string | null;
+  };
+  stats: Array<{
+    base_stat: number;
+    effort: number;
+    stat: { name: string; url: string };
+  }>;
+  types: Array<{ type: { name: string; url: string } }>;
+  weight: number;
 }

@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import useListPokemon from "../hooks/useListPokemon";
 import PokeCard from "../components/PokeCard";
@@ -25,7 +26,7 @@ const HomePage: React.FC = () => {
   return (
     <section className="home-page-container w-full flex flex-col">
       {loading ? (
-        <>Loading Pokémon... Gotta Catch 'Em All!</>
+        <>Loading Pokemon... Gotta Catch Em All!</>
       ) : (
         <>
           <section className="home-page-pokemon-containera w-full flex flex-wrap items-center justify-center">

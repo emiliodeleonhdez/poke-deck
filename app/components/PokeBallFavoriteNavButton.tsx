@@ -1,5 +1,4 @@
 import React from "react";
-import { Pokemon } from "../interfaces/pokemon";
 
 type PokeBallFavoriteNavButtonProps = {
   tooltipText?: string;

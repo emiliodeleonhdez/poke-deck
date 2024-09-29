@@ -1,7 +1,7 @@
 import { Pokemon } from "../interfaces/pokemon";
 
 export const addPokemonToStorage = (pokemon: Pokemon) => {
-  let parsedPokemons: any[] = [];
+  let parsedPokemons: Pokemon[] = [];
 
   const pokemonsInStorage = sessionStorage.getItem("caughtPokemons");
 
