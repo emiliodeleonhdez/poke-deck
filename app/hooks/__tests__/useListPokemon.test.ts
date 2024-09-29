@@ -1,27 +1,36 @@
-import { renderHook } from "@testing-library/react";
-import useListPokemon from "../useListPokemon";
+import { renderHook, act } from "@testing-library/react-hooks";
+import useListPokemon from "../../hooks/useListPokemon";
+import PokeAxiosClient from "../../client/apiClient";
+import { useError } from "../../context/ErrorContext";
 
-jest.mock("../../client/apiClient", () => {
-  return jest.fn().mockImplementation(() => ({
-    get: async () => ({
-      results: [
-        { url: "https://pokeapi.co/api/v2/pokemon/1" },
-        { url: "https://pokeapi.co/api/v2/pokemon/2" },
-      ],
-    }),
-  }));
-});
+jest.mock("../../client/apiClient");
 
-describe("useListPokemon hook", () => {
-  it("get a list of pokemons", async () => {
+jest.mock("../../context/ErrorContext", () => ({
+  useError: () => ({ setError: jest.fn() }),
+}));
+
+describe("useListPokemon Hook", () => {
+  it("fetches 20 pokemon from the endpoint", async () => {
+    const mockGet = jest.fn();
+    (PokeAxiosClient as jest.Mock).mockImplementation(() => ({
+      get: mockGet,
+    }));
+
+    const mockResponse = {
+      results: Array.from({ length: 20 }, (_, index) => ({
+        url: `https://pokeapi.co/api/v2/pokemon/${index + 1}/`,
+      })),
+    };
+
+    mockGet.mockResolvedValueOnce(mockResponse);
+
     const { result, waitForNextUpdate } = renderHook(() =>
-      useListPokemon("/pokemon?limit=2&offset=20")
+      useListPokemon("`/pokemon?limit=20&offset=20`")
     );
 
     await waitForNextUpdate();
 
+    expect(result.current.pokemonList).toHaveLength(20);
     expect(result.current.loading).toBe(false);
-
-    expect(result.current.pokemonList).toHaveLength(2);
   });
 });
