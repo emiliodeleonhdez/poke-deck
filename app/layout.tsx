@@ -4,6 +4,7 @@ import "./globals.css";
 import PokeNavMenu from "./components/PokeNavMenu";
 import { ErrorProvider } from "./context/ErrorContext";
 import ErrorDisplay from "./components/ErrorDisplay";
+import { Suspense } from "react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,16 +33,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ErrorProvider>
-          <header className="bg-white shadow-md p-4">
-            <PokeNavMenu />
-          </header>
-
-          <main className="flex-grow p-4">
-            {children}
-            <ErrorDisplay />
-          </main>
-        </ErrorProvider>
+        <Suspense fallback={<p>Loading...</p>}>
+          <ErrorProvider>
+            <header className="bg-white shadow-md p-4">
+              <PokeNavMenu />
+            </header>
+            <main className="flex-grow p-4">
+              {children}
+              <ErrorDisplay />
+            </main>
+          </ErrorProvider>
+        </Suspense>
       </body>
     </html>
   );
