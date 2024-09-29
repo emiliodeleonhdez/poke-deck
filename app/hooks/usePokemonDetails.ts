@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import PokeAxiosClient from "../client/apiClient";
 import { pokeApiUrl } from "../utils/constants";
 import {
-  AbilityResponse,
   EvolutionChainResponse,
   Pokemon,
+  PokemonResponsePromise,
 } from "../interfaces/pokemon";
 
 const usePokemonDetails = (search: string | null) => {
@@ -17,16 +17,16 @@ const usePokemonDetails = (search: string | null) => {
     if (search) {
       const getPokemonDetail = async () => {
         try {
-          const res = await pokeAxiosClient.get<any>(`/pokemon/${search}`);
+          const res = await pokeAxiosClient.get<PokemonResponsePromise>(
+            `/pokemon/${search}`
+          );
           console.log(res.abilities);
           const pokemonData: Pokemon = {
             pokemonId: res.id,
             name: res.name,
             image: res.sprites.front_default,
             types: res.types.map((type: any) => type.type.name),
-            ability: res.abilities.map(
-              (ability: AbilityResponse) => ability.ability.name
-            ),
+            ability: res.abilities.map((ability: any) => ability.ability.name),
             stats: res.stats.map((stat: any) => ({
               name: stat.stat.name,
               value: stat.base_stat,
