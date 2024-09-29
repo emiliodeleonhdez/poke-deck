@@ -43,7 +43,7 @@ export interface Stat {
 }
 
 export interface EvolutionChain {
-  chain: any;
+  chain: Chain | null;
 }
 
 export interface EvolutionChainResponse {
@@ -138,18 +138,14 @@ export interface PokemonResponsePromise {
   moves: Array<{ move: { name: string; url: string } }>;
   name: string;
   order: number;
-  past_abilities: Array<any>;
-  past_types: Array<any>;
+  past_abilities: Array<AbilityResponse>;
+  past_types: Array<PokemonType>;
   species: { name: string; url: string };
   sprites: {
     front_default: string;
     back_female: string | null;
   };
-  stats: Array<{
-    base_stat: number;
-    effort: number;
-    stat: { name: string; url: string };
-  }>;
-  types: Array<{ type: { name: string; url: string } }>;
+  stats: Array<Stat>;
+  types: Array<PokemonType>;
   weight: number;
 }

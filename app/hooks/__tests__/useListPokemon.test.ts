@@ -1,7 +1,6 @@
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react-hooks";
 import useListPokemon from "../../hooks/useListPokemon";
 import PokeAxiosClient from "../../client/apiClient";
-import { useError } from "../../context/ErrorContext";
 
 jest.mock("../../client/apiClient");
 

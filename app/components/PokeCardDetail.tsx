@@ -43,8 +43,8 @@ const PokeCardDetail: React.FC<PokeCardDetailProps> = ({
       <ul className="flex flex-col w-5/6 items-start justify-evenly m-2 p-2">
         {stats?.map((stat: Stat, index) => (
           <li key={index}>
-            <span className="capitalize font-bold">{stat.name}</span>:{" "}
-            <span>{stat.value}</span>
+            <span className="capitalize font-bold">{stat.stat.name}</span>:{" "}
+            <span>{stat.base_stat}</span>
           </li>
         ))}
         {evolutions.length > 1 ? (

@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import PokeAxiosClient from "../client/apiClient";
 import { pokeApiUrl } from "../utils/constants";
 import {
+  AbilityResponse,
   EvolutionChainResponse,
   Pokemon,
   PokemonResponsePromise,
+  PokemonType,
+  Stat,
 } from "../interfaces/pokemon";
 
 const usePokemonDetails = (search: string | null) => {
@@ -20,24 +23,31 @@ const usePokemonDetails = (search: string | null) => {
           const res = await pokeAxiosClient.get<PokemonResponsePromise>(
             `/pokemon/${search}`
           );
-          console.log(res.abilities);
+
           const pokemonData: Pokemon = {
             pokemonId: res.id,
             name: res.name,
             image: res.sprites.front_default,
-            types: res.types.map((type: any) => type.type.name),
-            ability: res.abilities.map((ability: any) => ability.ability.name),
-            stats: res.stats.map((stat: any) => ({
-              name: stat.stat.name,
-              value: stat.base_stat,
+            types: res.types.map((type: PokemonType) => type.type.name),
+            ability: res.abilities.map((ability: AbilityResponse) => ({
+              name: ability.ability.name,
+              url: ability.ability.url,
+            })),
+            stats: res.stats.map((stat: Stat) => ({
+              base_stat: stat.base_stat,
+              effort: stat.effort,
+              stat: {
+                name: stat.stat.name,
+                url: stat.stat.url,
+              },
             })),
           };
 
           setPokemonDetails(pokemonData);
 
-          const speciesRes = await pokeAxiosClient.get<any>(
-            `/pokemon-species/${pokemonData.pokemonId}`
-          );
+          const speciesRes = await pokeAxiosClient.get<{
+            evolution_chain: { url: string };
+          }>(`/pokemon-species/${pokemonData.pokemonId}`);
           const evolutionUrl = speciesRes.evolution_chain.url;
           const evolutionRes =
             await pokeAxiosClient.get<EvolutionChainResponse>(evolutionUrl);
