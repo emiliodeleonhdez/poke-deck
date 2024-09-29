@@ -63,3 +63,11 @@ The project includes a test case for the useListPokemon hook using Jest. The obj
 #### Summary
 
 This Poke Deck application leverages React, Next.js,TypeScript, Tailwind and PokeAPI to provide users with a seamless experience when searching and viewing detailed information about their favorite Pokémon. Error handling, state management, and testing are all integrated to ensure a robust and well-architected application.
+
+#### Asumptions
+
+- TS is very powerful, like all strongly typed languages; it makes development easier and cleaner.
+- Jest is hard to configure. I had to follow the steps line by line to set up a valid config.
+- I had to create a test case without knowing if it would run correctly. This is because the dev dependency for React Hooks (@testing-library/react-hooks) is only available for React versions lower than the one used in this project (18), specifically versions 16 and 17. However, I created a HomePage.test.tsx, ran a quick test, and it worked after setting up the correct configuration.
+- In the apiClient, I used a generic type T. It's helpful in cases like this when the API response is not clearly defined.
+- I had a lot of fun.
